@@ -1,0 +1,5 @@
+Precisamos criar um sistema que nos permita cadastrar dados sobre uma biblioteca particular. Esse sistema deve ser capaz de nos fornecer informações como os nomes dos livros, seus autores, a editora que os publica, data de publicação, preço pago em cada livro e seu assunto geral.
+
+No mínimo devemos também armazenar o nome completo de cada autor e o nome da editora. Também é interessante saber o número de páginas que cada livro tem.
+
+Lembrando que um livro pode ser escrito por mais de um autor, e é sempre publicado por uma única editora.

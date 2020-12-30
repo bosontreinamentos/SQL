@@ -1,0 +1,84 @@
+# Procedimentos Armazenados
+
+
+DROP PROCEDURE verPreço;
+
+CREATE PROCEDURE verPreço (varLivro smallint)
+
+SELECT CONCAT('O preço do livro ', NomeLivro, ' é ', PrecoLivro) AS Preço
+
+FROM tbl_livros
+
+WHERE IDLivro = varLivro;
+
+
+# Testando
+
+
+
+CALL verPreço(103);
+
+Excluir um procedimento armazenado:
+
+DROP PROCEDURE nome_procedimento;
+
+Exemplo 02:
+CREATE PROCEDURE consultaLivros (varEditora VARCHAR(50))
+SELECT CONCAT('O livro ', NomeLivro, ' custa ', PrecoLivro) AS Preço
+FROM tbl_Livros
+INNER JOIN tbl_editoras
+ON tbl_livros.IDeditora = tbl_editoras.IDEditora
+WHERE tbl_editoras.NomeEditora = varEditora;
+
+CALL consultaLivros('O´Reilly');
+
+Blocos BEGIN ... END
+São “contêineres” usados para delimitar blocos de comandos a serem executados pela função ou stored procedure.
+Cada declaração aninhada possui um delimitador (;).
+Um bloco BEGIN pode ser aninhado dentro de outros blocos.
+
+Porém o delimitador ; pode ser problemático pois, ao ser encontrado em um procedimento ou função, a finaliza imediatamente. É uma espécie de alias para o comando GO.
+Devemos então mudar esse “atalho” e, para isso, usamos o comando DELIMITER para criar rotinas com declarações compostas.
+
+Exemplo: 
+
+DELIMITER //
+CREATE PROCEDURE verPreço (varLivro smallint)
+BEGIN
+SELECT CONCAT('O preço é ', PrecoLivro) AS Preço
+FROM tbl_Livros
+WHERE IDLivro = varLivro;
+SELECT ‘Procedimento executado com sucesso!’;
+END//
+DELIMITER ;
+
+
+Testando:
+CALL verPreço(105);
+
+# Exemplo: aumentar os preços dos livros em X%
+
+DROP PROCEDURE aumentaPreço;
+
+DELIMITER //
+
+CREATE PROCEDURE aumentaPreço (X smallint)
+
+BEGIN
+
+UPDATE tbl_livros
+
+SET PrecoLivro = PrecoLivro * (1 + x/100);
+
+SELECT 'Procedimento executado com sucesso!';
+
+END//
+DELIMITER ;
+
+Testando
+SELECT PrecoLivro FROM tbl_livros WHERE IDlivro = 100;
+
+CALL aumentaPreço(10);
+
+SELECT PrecoLivro FROM tbl_livros WHERE IDlivro = 100;
+

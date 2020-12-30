@@ -1,0 +1,14 @@
+MER - Modelo Entidade-Relacionamento: Modelo Conceitual
+Banco de Dados: db_Biblioteca
+
+Entidades
+tbl_Livro(IdLivro,NomeLivro,ISBN,IdEditora,DataPub,PrecoLivro,IdAssunto,NumPaginas,Edicao)
+tbl_Autor(IdAutor,NomeAutor,SobrenomeAutor)
+tbl_Editora(IdEditora,NomeEditora)
+tbl_Assunto(IdAssunto,NomeAssunto)
+
+Relacionamentos
+tbl_Livro e tbl_Editora: Publica (PK: tbl_Editora.IdEditora FK: tbl_Livro.IdEditora)
+tbl_Livro e tbl_Assunto: Categoriza (PK: tbl_Assunto.IdAssunto FK: tbl_Livro.IdAssunto)
+tbl_Livro e tbl_Autor_Livro: É Escrito (PK: tbl_Livro.IdLivro FK: tbl_Autor_Livro.IdLivro)
+tbl_Autor e tbl_Autor_Livro: Escreve (PK: tbl_Autor.IdAutor FK: tbl_Autor_Livro.IdAutor)
